@@ -613,7 +613,7 @@ img { max-width: 100%; display: block; }
   position: sticky;
   top: var(--header-h);
   height: calc(100vh - var(--header-h));
-  height: calc(100dvh - var(--header-h));
+  height: calc(100svh - var(--header-h));
 }
 
 @media (max-width: 899px) {

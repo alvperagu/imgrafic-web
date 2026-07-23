@@ -184,13 +184,12 @@
     // out of view. Applies at every screen size.
     if (splitPin && splitGrid && !reduceMotion) {
       // Scale the runway with viewport height so each category holds the
-      // pin for a deliberate chunk of scroll — a flat px value reads as
-      // "barely stops" once the viewport (and wheel/trackpad deltas) is
-      // desktop-sized.
+      // pin for a short, deliberate bit of scroll — enough to feel like a
+      // stop, not so much that it takes several scroll gestures to advance.
       var runwayPerItem = 220;
 
       var sizeSplitPin = function () {
-        runwayPerItem = Math.max(220, window.innerHeight * 0.7);
+        runwayPerItem = Math.min(420, Math.max(200, window.innerHeight * 0.35));
         splitGrid.style.position = 'static';
         var gridHeight = splitGrid.offsetHeight;
         splitGrid.style.position = '';
