@@ -602,31 +602,44 @@ img { max-width: 100%; display: block; }
 }
 .services-split-media-frame img.is-front { opacity: 1; }
 
-/* Mobile: the grid pins to the top of the viewport while a tall spacer
-   (services-split-pin, sized in JS) is scrolled through, so the category
-   list and photo stay on screen together while the active item advances.
-   Sizes are trimmed down here so the full list + photo actually fit in
-   one screen while pinned. */
+/* The grid pins to the top of the viewport (below the header) and fills
+   the rest of the screen, while a tall spacer (services-split-pin, sized
+   in JS) is scrolled through underneath — so the category list and photo
+   stay on screen together, full-height, while the active item advances.
+   This applies at every breakpoint. */
 .services-split-pin { position: relative; }
 
+.services-split-grid {
+  position: sticky;
+  top: var(--header-h);
+  height: calc(100vh - var(--header-h));
+  height: calc(100dvh - var(--header-h));
+}
+
 @media (max-width: 899px) {
-  .services-split-grid { position: sticky; top: var(--header-h); }
+  .services-split-grid { grid-template-rows: auto 1fr; }
   .services-split-list { margin-bottom: .75rem; }
   .services-split-item { padding-block: .55rem; gap: .6rem; }
   .services-split-dot { margin-top: .4rem; }
   .services-split-text h3 { font-size: clamp(.95rem, 4vw, 1.05rem); line-height: 1.3; }
-  .services-split-media { margin-top: 0; }
-  .services-split-media-frame { aspect-ratio: auto; height: 28vh; height: 28dvh; }
+  .services-split-media { margin-top: 0; min-height: 0; }
+  .services-split-media-frame { aspect-ratio: auto; height: 100%; }
 }
 
 @media (min-width: 900px) {
   .services-split-grid { grid-template-columns: 1fr 1fr; align-items: stretch; gap: 3rem; }
-  .services-split-col { display: flex; flex-direction: column; }
-  .services-split-list { flex: 1; }
+  .services-split-col { display: flex; flex-direction: column; min-height: 0; }
+  .services-split-list {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   .services-split-media {
     margin-top: 0;
     width: 100%;
     height: 100%;
+    min-height: 0;
   }
   .services-split-media-frame { aspect-ratio: auto; height: 100%; }
 }

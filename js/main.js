@@ -121,7 +121,6 @@
 
   if (splitItems.length && splitFrame) {
     var splitItemsArr = Array.prototype.slice.call(splitItems);
-    var splitMobileQuery = window.matchMedia('(max-width: 899px)');
 
     var setSplitImage = function (src) {
       if (!src) return;
@@ -148,7 +147,7 @@
     if ('IntersectionObserver' in window) {
       var visibleSplitItems = [];
       var splitObserver = new IntersectionObserver(function (entries) {
-        if (splitPin && splitMobileQuery.matches) return; // pinned scroller drives mobile instead
+        if (splitPin && !reduceMotion) return; // pinned scroller drives this instead
         entries.forEach(function (entry) {
           var idx = visibleSplitItems.indexOf(entry.target);
           if (entry.isIntersecting && idx === -1) {
@@ -179,25 +178,26 @@
       el.addEventListener('focus', function () { activateSplitItem(el); });
     });
 
-    // Mobile: pin the list + photo on screen while a tall spacer is
-    // scrolled through underneath, so the active category and the photo
-    // advance together instead of scrolling past each other out of view.
+    // Pin the list + photo on screen, filling the viewport, while a tall
+    // spacer is scrolled through underneath, so the active category and
+    // the photo advance together instead of scrolling past each other
+    // out of view. Applies at every screen size.
     if (splitPin && splitGrid && !reduceMotion) {
-      var RUNWAY_PER_ITEM = 220;
+      // Scale the runway with viewport height so each category holds the
+      // pin for a deliberate chunk of scroll — a flat px value reads as
+      // "barely stops" once the viewport (and wheel/trackpad deltas) is
+      // desktop-sized.
+      var runwayPerItem = 220;
 
       var sizeSplitPin = function () {
-        if (!splitMobileQuery.matches) {
-          splitPin.style.height = '';
-          return;
-        }
+        runwayPerItem = Math.max(220, window.innerHeight * 0.7);
         splitGrid.style.position = 'static';
         var gridHeight = splitGrid.offsetHeight;
         splitGrid.style.position = '';
-        splitPin.style.height = (gridHeight + splitItemsArr.length * RUNWAY_PER_ITEM) + 'px';
+        splitPin.style.height = (gridHeight + splitItemsArr.length * runwayPerItem) + 'px';
       };
 
       var onSplitScroll = function () {
-        if (!splitMobileQuery.matches) return;
         var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
         var scrollable = splitPin.offsetHeight - splitGrid.offsetHeight;
         if (scrollable <= 0) return;
