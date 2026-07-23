@@ -1,0 +1,15 @@
+# Dependencies / build output
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+
+# Abandoned React prototype (no package.json/config on disk, unused by the live site)
+react-app/
+
+# Claude Code local project data (machine-local settings, scraped reference dumps)
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
