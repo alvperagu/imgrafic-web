@@ -116,9 +116,12 @@
 
   var splitItems = document.querySelectorAll('.services-split-item');
   var splitFrame = document.getElementById('services-split-frame');
+  var splitPin = document.getElementById('services-split-pin');
+  var splitGrid = document.querySelector('.services-split-grid');
 
   if (splitItems.length && splitFrame) {
     var splitItemsArr = Array.prototype.slice.call(splitItems);
+    var splitMobileQuery = window.matchMedia('(max-width: 899px)');
 
     var setSplitImage = function (src) {
       if (!src) return;
@@ -135,6 +138,7 @@
     };
 
     var activateSplitItem = function (item) {
+      if (item.classList.contains('is-active')) return;
       splitItemsArr.forEach(function (el) {
         el.classList.toggle('is-active', el === item);
       });
@@ -144,6 +148,7 @@
     if ('IntersectionObserver' in window) {
       var visibleSplitItems = [];
       var splitObserver = new IntersectionObserver(function (entries) {
+        if (splitPin && splitMobileQuery.matches) return; // pinned scroller drives mobile instead
         entries.forEach(function (entry) {
           var idx = visibleSplitItems.indexOf(entry.target);
           if (entry.isIntersecting && idx === -1) {
@@ -173,6 +178,45 @@
     splitItemsArr.forEach(function (el) {
       el.addEventListener('focus', function () { activateSplitItem(el); });
     });
+
+    // Mobile: pin the list + photo on screen while a tall spacer is
+    // scrolled through underneath, so the active category and the photo
+    // advance together instead of scrolling past each other out of view.
+    if (splitPin && splitGrid && !reduceMotion) {
+      var RUNWAY_PER_ITEM = 220;
+
+      var sizeSplitPin = function () {
+        if (!splitMobileQuery.matches) {
+          splitPin.style.height = '';
+          return;
+        }
+        splitGrid.style.position = 'static';
+        var gridHeight = splitGrid.offsetHeight;
+        splitGrid.style.position = '';
+        splitPin.style.height = (gridHeight + splitItemsArr.length * RUNWAY_PER_ITEM) + 'px';
+      };
+
+      var onSplitScroll = function () {
+        if (!splitMobileQuery.matches) return;
+        var headerH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 0;
+        var scrollable = splitPin.offsetHeight - splitGrid.offsetHeight;
+        if (scrollable <= 0) return;
+        var pinRect = splitPin.getBoundingClientRect();
+        var progress = (headerH - pinRect.top) / scrollable;
+        progress = Math.min(1, Math.max(0, progress));
+        var idx = Math.min(splitItemsArr.length - 1, Math.floor(progress * splitItemsArr.length));
+        activateSplitItem(splitItemsArr[idx]);
+      };
+
+      sizeSplitPin();
+      onSplitScroll();
+      window.addEventListener('scroll', onSplitScroll, { passive: true });
+      window.addEventListener('resize', function () {
+        sizeSplitPin();
+        onSplitScroll();
+      });
+      window.addEventListener('load', sizeSplitPin);
+    }
   }
 
 })();
