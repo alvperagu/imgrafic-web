@@ -576,7 +576,6 @@ img { max-width: 100%; display: block; }
 }
 
 .service-thumb {
-  position: relative;
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--paper-dim);
@@ -588,21 +587,6 @@ img { max-width: 100%; display: block; }
   transition: transform .6s cubic-bezier(.2,.8,.2,1);
 }
 .service-card:hover .service-thumb img { transform: scale(1.06); }
-
-/* Job-ticket number, echoing the mono print-spec motif used for labels */
-.service-num {
-  position: absolute;
-  top: .85rem;
-  left: .85rem;
-  padding: .3rem .55rem;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--paper);
-  font-family: var(--font-mono);
-  font-size: .72rem;
-  font-weight: 600;
-  letter-spacing: .08em;
-}
 
 .service-body {
   display: flex;
@@ -629,6 +613,7 @@ img { max-width: 100%; display: block; }
 .services-grid > .reveal:nth-child(6).is-visible { transition-delay: .35s; }
 .services-grid > .reveal:nth-child(7).is-visible { transition-delay: .42s; }
 .services-grid > .reveal:nth-child(8).is-visible { transition-delay: .49s; }
+.services-grid > .reveal:nth-child(9).is-visible { transition-delay: .56s; }
 
 /* ---------- Reviews carousel ---------- */
 .reviews {
