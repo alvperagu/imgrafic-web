@@ -114,6 +114,63 @@
     });
   }
 
+  // Contact form: posts to FormSubmit.co over fetch so the page stays put;
+  // without JS the browser submits the form's action normally.
+  var contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    var formNote = document.getElementById('contact-form-note');
+    var submitBtn = contactForm.querySelector('button[type=submit]');
+    var defaultNote = formNote ? formNote.textContent : '';
+    var endpoint = contactForm.action.replace('formsubmit.co/', 'formsubmit.co/ajax/');
+
+    function setNote(text) { if (formNote) formNote.textContent = text; }
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var invalid = false;
+      contactForm.querySelectorAll('[required]').forEach(function (field) {
+        var ok = field.value.trim() !== '';
+        field.closest('.field').classList.toggle('is-invalid', !ok);
+        if (!ok && !invalid) { field.focus(); invalid = true; }
+      });
+      if (invalid) {
+        setNote('Rellena tu nombre, un teléfono o email y qué necesitas.');
+        return;
+      }
+
+      var data = new FormData(contactForm);
+      data.set('_subject', 'Consulta web: ' + data.get('servicio') + ' — ' + data.get('nombre'));
+
+      submitBtn.disabled = true;
+      setNote('Enviando…');
+
+      fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: data
+      }).then(function (res) {
+        if (!res.ok) throw new Error(res.status);
+        return res.json();
+      }).then(function (json) {
+        // FormSubmit answers 200 even on failure; success comes back as the string "true".
+        if (String(json.success) !== 'true') throw new Error(json.message);
+        contactForm.reset();
+        setNote('Recibido. Te contestamos lo antes posible; si corre prisa, llama al 924 572 078.');
+      }).catch(function () {
+        setNote('No se ha podido enviar. Escríbenos a infoimgrafic@gmail.com o llama al 924 572 078.');
+      }).then(function () {
+        submitBtn.disabled = false;
+      });
+    });
+
+    contactForm.addEventListener('input', function (e) {
+      var wrap = e.target.closest('.field');
+      if (wrap && e.target.value.trim() !== '') wrap.classList.remove('is-invalid');
+      if (!contactForm.querySelector('.is-invalid')) setNote(defaultNote);
+    });
+  }
+
   var reviewsTrack = document.getElementById('reviews-track');
   var reviewsViewport = document.getElementById('reviews-viewport');
   var reviewsDots = document.getElementById('reviews-dots');
