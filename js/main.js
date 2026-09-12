@@ -114,65 +114,115 @@
     });
   }
 
-  var splitItems = document.querySelectorAll('.services-split-item');
-  var splitFrame = document.getElementById('services-split-frame');
+  var reviewsTrack = document.getElementById('reviews-track');
+  var reviewsViewport = document.getElementById('reviews-viewport');
+  var reviewsDots = document.getElementById('reviews-dots');
 
-  if (splitItems.length && splitFrame) {
-    var splitItemsArr = Array.prototype.slice.call(splitItems);
+  if (reviewsTrack && reviewsViewport && reviewsDots) {
+    var reviewCards = Array.prototype.slice.call(reviewsTrack.children);
+    var reviewsPrev = document.getElementById('reviews-prev');
+    var reviewsNext = document.getElementById('reviews-next');
+    var reviewIndex = 0;
+    var visibleCount = 1;
+    var maxIndex = 0;
+    var autoplayId = null;
+    var userTookOver = false;
 
-    var setSplitImage = function (src) {
-      if (!src) return;
-      var front = splitFrame.querySelector('img.is-front');
-      var back = splitFrame.querySelectorAll('img')[0] === front
-        ? splitFrame.querySelectorAll('img')[1]
-        : splitFrame.querySelectorAll('img')[0];
-      if (!back || (front && front.getAttribute('src') === src)) return;
-      back.onload = function () {
-        if (front) front.classList.remove('is-front');
-        back.classList.add('is-front');
-      };
-      back.src = src;
-    };
-
-    var activateSplitItem = function (item) {
-      splitItemsArr.forEach(function (el) {
-        el.classList.toggle('is-active', el === item);
-      });
-      setSplitImage(item.getAttribute('data-img'));
-    };
-
-    if ('IntersectionObserver' in window) {
-      var visibleSplitItems = [];
-      var splitObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          var idx = visibleSplitItems.indexOf(entry.target);
-          if (entry.isIntersecting && idx === -1) {
-            visibleSplitItems.push(entry.target);
-          } else if (!entry.isIntersecting && idx !== -1) {
-            visibleSplitItems.splice(idx, 1);
-          }
-        });
-        if (!visibleSplitItems.length) return;
-        var centerY = window.innerHeight / 2;
-        var closest = visibleSplitItems.reduce(function (best, el) {
-          var mid = el.getBoundingClientRect().top + el.offsetHeight / 2;
-          var dist = Math.abs(mid - centerY);
-          return (!best || dist < best.dist) ? { el: el, dist: dist } : best;
-        }, null);
-        activateSplitItem(closest.el);
-      }, { rootMargin: '-45% 0px -45% 0px', threshold: 0 });
-      splitItemsArr.forEach(function (el) { splitObserver.observe(el); });
+    function visibleForWidth() {
+      if (window.innerWidth >= 1000) return 3;
+      if (window.innerWidth >= 640) return 2;
+      return 1;
     }
 
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-      splitItemsArr.forEach(function (el) {
-        el.addEventListener('mouseenter', function () { activateSplitItem(el); });
+    function slide() {
+      var gap = parseFloat(getComputedStyle(reviewsTrack).columnGap) || 0;
+      var step = reviewCards[0].getBoundingClientRect().width + gap;
+      reviewsTrack.style.transform = 'translateX(' + (-reviewIndex * step) + 'px)';
+    }
+
+    function renderDots() {
+      reviewsDots.textContent = '';
+      for (var i = 0; i <= maxIndex; i++) {
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'reviews-dot' + (i === reviewIndex ? ' is-active' : '');
+        dot.setAttribute('aria-label', 'Ir a la reseña ' + (i + 1));
+        dot.addEventListener('click', (function (target) {
+          return function () { stopAutoplay(); goTo(target); };
+        })(i));
+        reviewsDots.appendChild(dot);
+      }
+    }
+
+    function syncDots() {
+      Array.prototype.forEach.call(reviewsDots.children, function (dot, i) {
+        dot.classList.toggle('is-active', i === reviewIndex);
       });
     }
 
-    splitItemsArr.forEach(function (el) {
-      el.addEventListener('focus', function () { activateSplitItem(el); });
+    function goTo(i) {
+      reviewIndex = i < 0 ? maxIndex : (i > maxIndex ? 0 : i);
+      slide();
+      syncDots();
+    }
+
+    function layout() {
+      var next = visibleForWidth();
+      var nextMax = Math.max(0, reviewCards.length - next);
+      if (next === visibleCount && nextMax === maxIndex) {
+        slide();
+        return;
+      }
+      visibleCount = next;
+      maxIndex = nextMax;
+      reviewsTrack.style.setProperty('--reviews-visible', visibleCount);
+      if (reviewIndex > maxIndex) reviewIndex = maxIndex;
+      renderDots();
+      slide();
+    }
+
+    function pauseAutoplay() {
+      if (autoplayId === null) return;
+      clearInterval(autoplayId);
+      autoplayId = null;
+    }
+
+    function startAutoplay() {
+      if (reduceMotion || userTookOver || autoplayId !== null) return;
+      autoplayId = setInterval(function () { goTo(reviewIndex + 1); }, 5000);
+    }
+
+    // Once the reader drives the carousel themselves, stop moving it under them.
+    function stopAutoplay() {
+      userTookOver = true;
+      pauseAutoplay();
+    }
+
+    reviewsPrev.addEventListener('click', function () { stopAutoplay(); goTo(reviewIndex - 1); });
+    reviewsNext.addEventListener('click', function () { stopAutoplay(); goTo(reviewIndex + 1); });
+
+    var swipeStartX = null;
+    reviewsViewport.addEventListener('pointerdown', function (e) { swipeStartX = e.clientX; });
+    reviewsViewport.addEventListener('pointerup', function (e) {
+      if (swipeStartX === null) return;
+      var dx = e.clientX - swipeStartX;
+      swipeStartX = null;
+      if (Math.abs(dx) < 45) return;
+      stopAutoplay();
+      goTo(reviewIndex + (dx < 0 ? 1 : -1));
     });
+    reviewsViewport.addEventListener('pointercancel', function () { swipeStartX = null; });
+    reviewsViewport.addEventListener('pointerleave', function () { swipeStartX = null; });
+
+    var reviewsCarousel = reviewsTrack.closest('.reviews-carousel');
+    reviewsCarousel.addEventListener('pointerenter', pauseAutoplay);
+    reviewsCarousel.addEventListener('pointerleave', startAutoplay);
+    reviewsCarousel.addEventListener('focusin', pauseAutoplay);
+    reviewsCarousel.addEventListener('focusout', startAutoplay);
+
+    layout();
+    window.addEventListener('resize', layout);
+    startAutoplay();
   }
 
 })();

@@ -26,6 +26,7 @@
 
     <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
+      <a href="#resenas">Reseñas</a>
       <a href="#nosotros">Nosotros</a>
       <a href="#contacto">Contacto</a>
     </nav>
@@ -43,6 +44,7 @@
 
   <div class="mobile-nav" id="mobile-nav">
     <a href="#servicios">Servicios</a>
+    <a href="#resenas">Reseñas</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#contacto">Contacto</a>
     <a class="btn btn-call" href="tel:+34924572078">Llamar · 924 572 078</a>
@@ -136,69 +138,281 @@
     </div>
   </section>
 
-  <!-- SERVICES: hover/scroll list with swapping image -->
-  <section class="services-split" id="servicios">
-    <div class="wrap services-split-intro">
+  <!-- SERVICES -->
+  <section class="services" id="servicios">
+    <div class="wrap services-intro">
       <p class="eyebrow eyebrow-dark">Servicios</p>
-      <h2 class="stack-heading">Todo bajo<br>un mismo techo</h2>
+      <h2 class="services-heading">Todo bajo<br>un mismo techo</h2>
+      <p class="services-lede">
+        Impresión, diseño, rotulación y personalización en el mismo taller.
+        Todo lo que tu negocio necesita para comunicar con impacto, aquí
+        en Los Santos de Maimona.
+      </p>
     </div>
 
-    <div class="wrap services-split-grid">
+    <div class="wrap">
+      <ul class="services-grid">
 
-      <div class="services-split-col">
-        <ul class="services-split-list" id="services-split-list">
-          <li class="services-split-item is-active" data-img="images/pexels-criiv-9550363.jpg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Copias e imprenta digital al momento</h3>
-            </span>
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/diseno-grafico.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Mesa de diseño con muestras de color, pruebas impresas y material corporativo">
+            <span class="service-num" aria-hidden="true">01</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Diseño gráfico</span>
+            <h3>Diseño gráfico profesional</h3>
+            <p>Creamos la identidad visual que tu marca merece: logotipos, branding, material publicitario y piezas corporativas listas para impresión. Diseño orientado a resultados para empresas y autónomos.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/rotulacion.jpg" width="1200" height="898" loading="lazy" decoding="async" alt="Plóter de corte de vinilo y lonas impresas en el taller de rotulación">
+            <span class="service-num" aria-hidden="true">02</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Rotulación</span>
+            <h3>Rotulación comercial e industrial</h3>
+            <p>Da visibilidad a tu negocio con rótulos interiores y exteriores de alta durabilidad: escaparates, vehículos, locales comerciales y espacios de trabajo. Instalación profesional incluida.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/copisteria.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Copiadoras y documentación encuadernada en la zona de copistería">
+            <span class="service-num" aria-hidden="true">03</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Copistería</span>
+            <h3>Copistería profesional</h3>
+            <p>Copias, impresiones, escáner y encuadernación con acabado impecable. Ideal para documentación empresarial, trabajos académicos, informes y presentaciones que necesitan verse bien.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/personalizacion.jpg" width="1024" height="1024" loading="lazy" decoding="async" alt="Camiseta, sudadera y bolsas personalizadas con el logotipo de Imgrafic">
+            <span class="service-num" aria-hidden="true">04</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Personalizaciones</span>
+            <h3>Serigrafía y personalización</h3>
+            <p>Camisetas, tazas, textiles y merchandising corporativo con tu logo o diseño. Perfecto para uniformes de empresa, eventos, regalos de empresa y promociones. Pequeñas y grandes tiradas.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/impresion-offset.jpg" width="613" height="462" loading="lazy" decoding="async" alt="Máquina de gran formato imprimiendo a todo color">
+            <span class="service-num" aria-hidden="true">05</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Impresión offset</span>
+            <h3>Impresión offset y digital</h3>
+            <p>Alta fidelidad de color y acabados perfectos tanto para tiradas cortas como para grandes volúmenes. La solución más profesional y económica según tus necesidades.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/flyers-tarjetas.jpg" width="1200" height="900" loading="lazy" decoding="async" alt="Folleto, carta corporativa y tarjetas de visita impresas sobre una mesa de oficina">
+            <span class="service-num" aria-hidden="true">06</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Impresión digital</span>
+            <h3>Flyers, folletos y tarjetas de visita</h3>
+            <p>Materiales publicitarios que abren puertas: tarjetas de visita, flyers para tu local, trípticos informativos y folletos corporativos. Diseño e impresión de calidad al mejor precio.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/laser.jpg" width="1200" height="1800" loading="lazy" decoding="async" alt="Cajas y piezas de cartón kraft troqueladas sobre una mesa clara">
+            <span class="service-num" aria-hidden="true">07</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Láser</span>
+            <h3>Corte y grabado láser</h3>
+            <p>Cortamos y grabamos madera, metacrilato, cartón y textil con precisión milimétrica. Ideal para señalética, packaging especial, trofeos, decoración y piezas a medida en series cortas.</p>
+          </div>
+        </li>
+
+        <li class="service-card reveal">
+          <div class="service-thumb">
+            <img src="images/servicios/etiquetas.jpg" width="1200" height="800" loading="lazy" decoding="async" alt="Cuaderno, papel kraft y sello de caucho ordenados sobre fondo claro">
+            <span class="service-num" aria-hidden="true">08</span>
+          </div>
+          <div class="service-body">
+            <span class="pill">Etiquetas</span>
+            <h3>Etiquetas adhesivas y pegatinas</h3>
+            <p>Etiquetas en bobina o en plancha para producto, envases y promociones, con troquelado a medida y acabados resistentes al agua. Cualquier forma y cualquier tamaño, desde una unidad.</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="resenas" aria-labelledby="reviews-heading">
+    <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" focusable="false">
+      <symbol id="icon-star" viewBox="0 0 24 24">
+        <path d="M12 2.4l2.92 5.92 6.53.95-4.72 4.6 1.11 6.51L12 17.31l-5.84 3.07 1.11-6.51-4.72-4.6 6.53-.95L12 2.4Z"/>
+      </symbol>
+    </svg>
+
+    <div class="wrap reviews-head">
+      <p class="eyebrow eyebrow-invert">Reseñas</p>
+      <h2 class="reviews-heading" id="reviews-heading">Lo que dicen<br>nuestros clientes</h2>
+      <p class="reviews-lede">La confianza de quienes ya han pasado por el taller es nuestro mejor aval.</p>
+
+      <p class="reviews-score">
+        <svg class="reviews-google" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path fill="#4285F4" d="M23.5 12.27c0-.82-.07-1.6-.21-2.36H12v4.47h6.46a5.53 5.53 0 0 1-2.4 3.62v3.01h3.88c2.27-2.09 3.58-5.17 3.58-8.74Z"/>
+          <path fill="#34A853" d="M12 24c3.24 0 5.96-1.08 7.94-2.91l-3.88-3.01c-1.07.72-2.45 1.15-4.06 1.15-3.12 0-5.76-2.11-6.71-4.94H1.29v3.1A12 12 0 0 0 12 24Z"/>
+          <path fill="#FBBC05" d="M5.29 14.29a7.2 7.2 0 0 1 0-4.58v-3.1H1.29a12 12 0 0 0 0 10.78l4-3.1Z"/>
+          <path fill="#EA4335" d="M12 4.77c1.76 0 3.34.61 4.59 1.8l3.43-3.43C17.95 1.19 15.24 0 12 0A12 12 0 0 0 1.29 6.61l4 3.1C6.24 6.88 8.88 4.77 12 4.77Z"/>
+        </svg>
+        <span class="reviews-score-num">4,7</span>
+        <span class="stars" role="img" aria-label="4,7 de 5 estrellas">
+          <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+          <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+        </span>
+        <span class="reviews-score-label">en Google</span>
+      </p>
+    </div>
+
+    <div class="wrap reviews-carousel">
+      <div class="reviews-viewport" id="reviews-viewport">
+        <ul class="reviews-track" id="reviews-track">
+
+          <li class="review-card">
+            <span class="review-quote" aria-hidden="true">&rdquo;</span>
+            <p class="review-text">Es una empresa donde puedes hacer reproducciones de todos los tamaños hasta de gran formato, incluso imprimir libros. Trabajan bien y el trato es educado y correcto. Los precios son muy competitivos.</p>
+            <div class="review-author">
+              <span class="review-avatar is-yellow" aria-hidden="true">AB</span>
+              <div class="review-meta">
+                <p class="review-name">Angel Bernal Estevez</p>
+                <span class="review-rating">
+                  <span class="stars" role="img" aria-label="4 de 5 estrellas">
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star is-empty" aria-hidden="true"><use href="#icon-star"/></svg>
+                  </span>
+                  <span class="review-source">Google</span>
+                </span>
+              </div>
+            </div>
           </li>
-          <li class="services-split-item" data-img="images/pexels-bertellifotografia-33714867.jpg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Vinilo de corte y rótulos a medida</h3>
-            </span>
+
+          <li class="review-card">
+            <span class="review-quote" aria-hidden="true">&rdquo;</span>
+            <p class="review-text">Muy profesionales, con un equipo de diseño único. Cuidan al detalle cada trabajo que les encomiendas, y sus precios son muy competitivos.</p>
+            <div class="review-author">
+              <span class="review-avatar is-sky" aria-hidden="true">MS</span>
+              <div class="review-meta">
+                <p class="review-name">Maria &amp; Simue</p>
+                <span class="review-rating">
+                  <span class="stars" role="img" aria-label="5 de 5 estrellas">
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                  </span>
+                  <span class="review-source">Google</span>
+                </span>
+              </div>
+            </div>
           </li>
-          <li class="services-split-item" data-img="images/pexels-pnw-prod-8250900.jpg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Corte y grabado láser</h3>
-            </span>
+
+          <li class="review-card">
+            <span class="review-quote" aria-hidden="true">&rdquo;</span>
+            <p class="review-text">Gente buena y trabajadora donde la haya, te resuelven las dudas a la primera y siempre te ofrecen la solución que mejor se adapte a tu presupuesto.</p>
+            <div class="review-author">
+              <span class="review-avatar is-orange" aria-hidden="true">AP</span>
+              <div class="review-meta">
+                <p class="review-name">Andres Pro</p>
+                <span class="review-rating">
+                  <span class="stars" role="img" aria-label="5 de 5 estrellas">
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                  </span>
+                  <span class="review-source">Google</span>
+                </span>
+              </div>
+            </div>
           </li>
-          <li class="services-split-item" data-img="images/pexels-thecactusena-18936420.jpg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Si no tienes el archivo, lo creamos</h3>
-            </span>
+
+          <li class="review-card">
+            <span class="review-quote" aria-hidden="true">&rdquo;</span>
+            <p class="review-text">Buena calidad de impresión, y rapidez en el trabajo. Recomendable.</p>
+            <div class="review-author">
+              <span class="review-avatar is-yellow" aria-hidden="true">JB</span>
+              <div class="review-meta">
+                <p class="review-name">José Antonio Benítez de la Rosa</p>
+                <span class="review-rating">
+                  <span class="stars" role="img" aria-label="4 de 5 estrellas">
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star is-empty" aria-hidden="true"><use href="#icon-star"/></svg>
+                  </span>
+                  <span class="review-source">Google</span>
+                </span>
+              </div>
+            </div>
           </li>
-          <li class="services-split-item" data-img="images/pexels-cup-of-couple-7657389.jpg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Etiquetas adhesivas</h3>
-            </span>
+
+          <li class="review-card">
+            <span class="review-quote" aria-hidden="true">&rdquo;</span>
+            <p class="review-text">La mejor imprenta de Los Santos, Zafra y alrededores. Trato muy profesional, trabajos exquisitos.</p>
+            <div class="review-author">
+              <span class="review-avatar is-sky" aria-hidden="true">MT</span>
+              <div class="review-meta">
+                <p class="review-name">Music Technoo</p>
+                <span class="review-rating">
+                  <span class="stars" role="img" aria-label="5 de 5 estrellas">
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                    <svg class="star" aria-hidden="true"><use href="#icon-star"/></svg>
+                  </span>
+                  <span class="review-source">Google</span>
+                </span>
+              </div>
+            </div>
           </li>
-          <li class="services-split-item" data-img="camisetas.jpeg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Objetos personalizados</h3>
-            </span>
-          </li>
-          <li class="services-split-item" data-img="images/pexels-cottonbro-5190596.jpg" tabindex="0">
-            <span class="services-split-dot" aria-hidden="true"></span>
-            <span class="services-split-text">
-              <h3>Fotocopias y escaneados</h3>
-            </span>
-          </li>
+
         </ul>
       </div>
 
-      <div class="services-split-media">
-        <div class="services-split-media-frame" id="services-split-frame">
-          <img class="is-front" src="images/pexels-criiv-9550363.jpg" alt="">
-          <img src="" alt="">
-        </div>
+      <div class="reviews-controls">
+        <button class="reviews-arrow" type="button" id="reviews-prev" aria-label="Reseña anterior" aria-controls="reviews-track">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 19 8 12l7-7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="reviews-dots" id="reviews-dots"></div>
+        <button class="reviews-arrow" type="button" id="reviews-next" aria-label="Siguiente reseña" aria-controls="reviews-track">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m9 5 7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
       </div>
 
+      <p class="reviews-link-row">
+        <a class="reviews-link" href="https://www.google.com/maps/place/IMGRAFIC+-+Centro+de+Impresi%C3%B3n/@38.4451239,-6.3799335,17z/" target="_blank" rel="noopener">
+          Ver todas las reseñas en Google
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 6H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-4M14 4h6m0 0v6m0-6L10 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </p>
     </div>
   </section>
 
