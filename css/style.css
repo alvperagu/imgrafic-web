@@ -909,13 +909,6 @@ img { max-width: 100%; display: block; }
 .about-text {
   max-width: 34rem;
 }
-.about-quote {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: clamp(1.8rem, 3.4vw, 2.75rem);
-  line-height: 1.28;
-  color: var(--ink);
-}
 .about-body {
   margin-top: 1.5rem;
   color: var(--ink-70);
@@ -923,12 +916,45 @@ img { max-width: 100%; display: block; }
   line-height: 1.6;
   max-width: 34rem;
 }
-.about-signature {
-  margin-top: 2rem;
-  font-family: var(--font-mono);
-  font-size: .78rem;
-  letter-spacing: .06em;
+.about-text .about-body { margin-top: 0; }
+.about-body + .about-body { margin-top: 1.1rem; }
+.about-lead {
+  font-size: 1.12rem;
+  color: var(--ink);
+}
+.about-features {
+  list-style: none;
+  margin: 2.25rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+.about-features li {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+.about-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: var(--yellow);
+  color: var(--ink);
+  display: grid;
+  place-items: center;
+}
+.about-icon svg { width: 24px; height: 24px; }
+.about-features h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.about-features p {
+  margin-top: .35rem;
   color: var(--ink-70);
+  font-size: .97rem;
+  line-height: 1.55;
 }
 
 .about-carousel {
