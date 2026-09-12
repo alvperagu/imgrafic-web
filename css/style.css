@@ -1298,6 +1298,9 @@ img { max-width: 100%; display: block; }
   gap: .5rem;
 }
 .footer-credit { color: var(--paper-70); }
+.footer-credit a { text-decoration: underline; text-underline-offset: 2px; text-decoration-color: rgba(255,248,236,.35); transition: color .2s ease, text-decoration-color .2s ease; }
+.footer-credit a:hover,
+.footer-credit a:focus-visible { color: var(--paper); text-decoration-color: currentColor; }
 
 @media (min-width: 800px) {
   .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
